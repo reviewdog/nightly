@@ -1,5 +1,7 @@
 name: release
 
+# To run relase process manually, run the following command.
+# $curl -H "Authorization: token ${GITHUB_API_TOKEN}" https://api.github.com/repos/reviewdog/nightly/dispatches -d '{"event_type":"release"}'
 on:
   schedule:
     - cron:  '14 20 * * *' # Runs at 20:14 UTC (5:14 JST) every day.
