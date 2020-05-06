@@ -31,6 +31,7 @@ jobs:
           git tag -a "$(git describe --abbrev=0 --tags)-nightly$(date +%Y%m%d)+${NEW_SHA}" -m "nightly release"
 
       - name: Set previous sha/tag
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -38,9 +39,9 @@ jobs:
           PREVIOUS_TAG="$(curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/reviewdog/nightly/releases | jq -r '.[0].tag_name')"
           PREVIOUS_SHA="$(echo "${PREVIOUS_TAG}" | grep -oP '.*\+\K.*' )"
           if [ -n "${PREVIOUS_SHA}" ]; then
-            git tag -a "${PREVIOUS_TAG}" -m "prev-nightly" "${PREVIOUS_SHA}"
-            echo "::set-env name=PREVIOUS_SHA::${PREVIOUS_SHA}"
-            echo "::set-env name=GORELEASER_PREVIOUS_TAG::${PREVIOUS_TAG}"
+            git tag -a "${PREVIOUS_TAG}" -m "prev-nightly" "${PREVIOUS_SHA}" && \
+              echo "::set-env name=PREVIOUS_SHA::${PREVIOUS_SHA}" && \
+              echo "::set-env name=GORELEASER_PREVIOUS_TAG::${PREVIOUS_TAG}"
           fi
 
       - uses: goreleaser/goreleaser-action@v1
