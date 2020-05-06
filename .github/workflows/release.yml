@@ -15,7 +15,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: 'reviewdog/reviewdog'
-          ref: 'nightly' # TODO(haya14busa): switch to master.
 
       - name: Setup
         run: |
