@@ -19,7 +19,7 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git tag -a "nightly-$(date +%F)-$(git rev-parse --short HEAD)" -m "nightly release"
+          git tag -a "$(git describe --abbrev=0 --tags)-nightly-$(date +%F)+$(git rev-parse --short HEAD)" -m "nightly release"
 
       - uses: goreleaser/goreleaser-action@v1
         with:
