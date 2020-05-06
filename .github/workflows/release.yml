@@ -22,6 +22,12 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
+      - name: Add tag
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git tag -a "$(git describe --abbrev=0 --tags)-nightly-$(date +%F)+$(git rev-parse --short HEAD)" -m "nightly release"
+
       - name: Set previous sha/tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,12 +40,6 @@ jobs:
             echo "::set-env name=PREVIOUS_SHA::${PREVIOUS_SHA}"
             echo "::set-env name=GORELEASER_PREVIOUS_TAG::${PREVIOUS_TAG}"
           fi
-
-      - name: Add tag
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git tag -a "$(git describe --abbrev=0 --tags)-nightly-$(date +%F)+$(git rev-parse --short HEAD)" -m "nightly release"
 
       - uses: goreleaser/goreleaser-action@v1
         with:
