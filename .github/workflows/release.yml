@@ -15,10 +15,27 @@ jobs:
           repository: 'reviewdog/reviewdog'
           ref: 'nightly' # TODO(haya14busa): switch to master.
 
-      - name: Add tag
+      - name: Setup
         run: |
           git fetch --tags
           git fetch --prune --unshallow
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Set previous sha/tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # ref: https://goreleaser.com/customization/#Release
+          PREVIOUS_SHA="$(curl -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/reviewdog/nightly/releases | jq -r '.[0].tag_name' | grep -oP '.*\+\K.*' )"
+          if [ -n "${PREVIOUS_SHA}" ]; then
+            git tag -a "prev-nightly" -m "prev-nightly" ${PREVIOUS_SHA}
+            echo "::set-env name=PREVIOUS_SHA::${PREVIOUS_SHA}"
+            echo "::set-env name=GORELEASER_PREVIOUS_TAG::prev-nightly"
+          fi
+
+      - name: Add tag
+        run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git tag -a "$(git describe --abbrev=0 --tags)-nightly-$(date +%F)+$(git rev-parse --short HEAD)" -m "nightly release"
