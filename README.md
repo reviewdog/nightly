@@ -1,7 +1,9 @@
 # reviewdog nightly releases
 [![release](https://github.com/reviewdog/nightly/workflows/release/badge.svg)](https://github.com/reviewdog/nightly/actions?query=workflow%3Arelease)
 [![release page](https://img.shields.io/github/release/reviewdog/nightly.svg?logo=github)](https://github.com/reviewdog/nightly/releases)
+<!--
 [![release stat](https://img.shields.io/github/downloads/reviewdog/nightly/total.svg?logo=github)](https://somsubhra.com/github-release-stats/?username=reviewdog&repository=nightly)
+-->
 
 It provides nightly [reviewdog](https://github.com/reviewdog/reviewdog) releases.
 You'll get to try the latest reviwedog improvements every day.
