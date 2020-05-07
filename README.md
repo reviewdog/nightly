@@ -6,7 +6,7 @@
 -->
 
 It provides nightly [reviewdog](https://github.com/reviewdog/reviewdog) releases.
-You'll get to try the latest reviwedog improvements every day.
+You'll get to try the latest reviewdog improvements every day.
 
 Your feedback will support reviewdog maintainance, so I hope you'll consider
 trying the reviewdog nightly and give us any feedback!
