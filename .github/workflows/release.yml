@@ -44,7 +44,7 @@ jobs:
               echo "::set-env name=GORELEASER_PREVIOUS_TAG::${PREVIOUS_TAG}"
           fi
 
-      - uses: goreleaser/goreleaser-action@v1
+      - uses: goreleaser/goreleaser-action@v2
         if: env.NEW_SHA != env.PREVIOUS_SHA
         with:
           version: latest
