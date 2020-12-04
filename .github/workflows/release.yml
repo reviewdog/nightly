@@ -27,7 +27,7 @@ jobs:
       - name: Add tag
         run: |
           NEW_SHA="$(git rev-parse --short HEAD)"
-          echo "::set-env name=NEW_SHA::${NEW_SHA}"
+          echo "NEW_SHA=${NEW_SHA}" >> $GITHUB_ENV
           git tag -a "$(git describe --abbrev=0 --tags)-nightly$(date +%Y%m%d)+${NEW_SHA}" -m "nightly release"
 
       - name: Set previous sha/tag
@@ -40,8 +40,8 @@ jobs:
           PREVIOUS_SHA="$(echo "${PREVIOUS_TAG}" | grep -oP '.*\+\K.*' )"
           if [ -n "${PREVIOUS_SHA}" ]; then
             git tag -a "${PREVIOUS_TAG}" -m "prev-nightly" "${PREVIOUS_SHA}" && \
-              echo "::set-env name=PREVIOUS_SHA::${PREVIOUS_SHA}" && \
-              echo "::set-env name=GORELEASER_PREVIOUS_TAG::${PREVIOUS_TAG}"
+              echo "PREVIOUS_SHA=${PREVIOUS_SHA}" >> $GITHUB_ENV && \
+              echo "GORELEASER_PREVIOUS_TAG=${PREVIOUS_TAG}" >> $GITHUB_ENV
           fi
 
       - uses: goreleaser/goreleaser-action@v2
