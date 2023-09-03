@@ -46,7 +46,7 @@ jobs:
 
       - uses: actions/setup-go@v4
         with:
-          go-version: "1.16"
+          go-version-file: "go.mod"
 
       - uses: goreleaser/goreleaser-action@v4
         if: env.NEW_SHA != env.PREVIOUS_SHA
