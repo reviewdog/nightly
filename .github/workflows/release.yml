@@ -4,7 +4,7 @@ name: release
 # $curl -H "Authorization: token ${GITHUB_API_TOKEN}" https://api.github.com/repos/reviewdog/nightly/dispatches -d '{"event_type":"release"}'
 on:
   schedule:
-    - cron:  '14 20 * * *' # Runs at 20:14 UTC (5:14 JST) every day.
+    - cron: "14 20 * * *" # Runs at 20:14 UTC (5:14 JST) every day.
   repository_dispatch:
     types: [release]
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'reviewdog/reviewdog'
+          repository: "reviewdog/reviewdog"
 
       - name: Setup
         run: |
@@ -46,13 +46,13 @@ jobs:
 
       - uses: actions/setup-go@v4
         with:
-          go-version: '1.16'
+          go-version: "1.16"
 
       - uses: goreleaser/goreleaser-action@v4
         if: env.NEW_SHA != env.PREVIOUS_SHA
         with:
           version: latest
-          args: release --rm-dist --config=.goreleaser-nightly.yml
+          args: release --clean --config=.goreleaser-nightly.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
