@@ -14,13 +14,13 @@ Please [file an issue](https://github.com/reviewdog/reviewdog/issues) if you com
 
 ```shell
 # Install the latest version. (Install it into ./bin/ by default).
-$ curl -sfL https://raw.githubusercontent.com/reviewdog/nightly/master/install.sh| sh -s
+$ curl -sfL https://raw.githubusercontent.com/reviewdog/nightly/30fccfe9f47f7e6fd8b3c38aa0da11a6c9f04de7/install.sh| sh -s
 
 # Specify installation directory ($(go env GOPATH)/bin/)
-$ curl -sfL https://raw.githubusercontent.com/reviewdog/nightly/master/install.sh| sh -s -- -b $(go env GOPATH)/bin
+$ curl -sfL https://raw.githubusercontent.com/reviewdog/nightly/30fccfe9f47f7e6fd8b3c38aa0da11a6c9f04de7/install.sh| sh -s -- -b $(go env GOPATH)/bin
 
 # In alpine linux (as it does not come with curl by default)
-$ wget -O - -q https://raw.githubusercontent.com/reviewdog/nightly/master/install.sh| sh -s [vX.Y.Z]
+$ wget -O - -q https://raw.githubusercontent.com/reviewdog/nightly/30fccfe9f47f7e6fd8b3c38aa0da11a6c9f04de7/install.sh| sh -s [vX.Y.Z]
 ```
 
 You can check installed version and +build commit short hash with `reviewdog -version`.
