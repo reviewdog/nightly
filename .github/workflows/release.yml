@@ -13,7 +13,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           repository: "reviewdog/reviewdog"
 
@@ -44,11 +44,11 @@ jobs:
               echo "GORELEASER_PREVIOUS_TAG=${PREVIOUS_TAG}" >> $GITHUB_ENV
           fi
 
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: actions/setup-go@v7.0.0
         with:
           go-version-file: "go.mod"
 
-      - uses: goreleaser/goreleaser-action@f06c13b6b1a9625abc9e6e439d9c05a8f2190e94 # v7.2.3
+      - uses: goreleaser/goreleaser-action@v7.2.3
         if: env.NEW_SHA != env.PREVIOUS_SHA
         with:
           version: "~> v2"
