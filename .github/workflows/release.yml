@@ -48,7 +48,7 @@ jobs:
         with:
           go-version-file: "go.mod"
 
-      - uses: goreleaser/goreleaser-action@v7.2.3
+      - uses: goreleaser/goreleaser-action@v7.3.0
         if: env.NEW_SHA != env.PREVIOUS_SHA
         with:
           version: "~> v2"
